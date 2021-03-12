@@ -1,4 +1,5 @@
 #!/bin/bash
+# ConnectMyPlace.com 12th March 2021
 # All Witty Cloud MQTT client LDR values are monitored and if dark detected(<200) light switched on 
 # MQTT broker data is piped to this script. 
 # if a topic containing the word SENSOR is detected then the topic id and data are displayed

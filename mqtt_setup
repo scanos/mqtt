@@ -1,0 +1,11 @@
+sudo apt-get install mosquitto mosquitto-clients
+sudo systemctl enable mosquitto
+mosquitto_passwd -c passwordfile test
+sudo cp passwordfile /etc/mosquitto/
+sudo nano /etc/mosquitto/mosquitto.conf
+And add following two entries to the mosquitto.conf file,
+password_file /etc/mosquitto/passwordfile
+allow_anonymous false
+mosquitto_sub -h localhost -p 1883 -t myTopic -u <user_name> -P <password>
+mosquitto_pub -h 192.168.1.239 -p 1883 -t myTopic stat/tasmota_03CA1D/POWER -m off
+

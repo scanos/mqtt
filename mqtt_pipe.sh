@@ -1,4 +1,5 @@
 #!/bin/bash
+# ConnectMyPlace.com 12th MArch 2021
 # MQTT broker data is piped to this script.
 # if a topic containing the word SENSOR is detected then the topic id and data are displayed
 

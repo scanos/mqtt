@@ -1,3 +1,6 @@
+#!/bin/bash
+# mqtt_pipe_deepsleeptst.sh MQTT broker data is piped to this script which logs temperature and goes deepsleep
+# if a topic containing the word SENSOR is detected then the topic id and data are displayed
 # mosquitto_sub -h localhost -p 1883 -v -t '#' -u test -P test | ./mqtt_pipe_deepsleeptst.sh
 while read data && [ "$data" != "" ]
 do

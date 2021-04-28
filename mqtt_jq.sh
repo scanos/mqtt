@@ -6,6 +6,10 @@
 # furthermore, if LDR value, ie darkness detected(<200) then device light is switched on
 # run using mosquitto_sub -h localhost -p 1883 -v -t '#' -u test -P test | ./mqtt_jq.sh
 
+
+mosquitto_pub -t "cmnd/tasmota_4C5AA3/DeepsleepTime" -r -m "0"  -u test -P test
+mosquitto_pub -t "cmnd/tasmota_5E5469/DeepsleepTime" -r -m "0"  -u test -P test
+mosquitto_pub -t "cmnd/tasmota_4C7759/DeepsleepTime" -r -m "0"  -u test -P test
 broker_ip="192.168.8.111"
 #lower_target=200
 while read data && [ "$data" != "" ]
@@ -13,7 +17,7 @@ do
 
 #if [[ $data == *"SENSOR"* ]]; then
 	IN=$data
-        #echo $data
+        echo $data
 	arrIN=(${IN//;/ })
 	id=$(echo ${arrIN[0]})
         if [[ $IN == *"Temperature"* ]]; then
@@ -28,9 +32,9 @@ do
 mqtt_cmd=${id/tele/cmnd}
 mqtt_cmd=${mqtt_cmd/SENSOR/DeepsleepTime}
 echo $mqtt_cmd
-
-echo "$id $an_data $DS1_data_temp $AM2301_data_temp $AM2301_data_humidity" >>  deepsleep.log
-mosquitto_pub -t "${mqtt_cmd}" -r -m "3600"  -u test -P test
+date1=$(date)
+echo "$date1,$id,$DS1_data_temp,$AM2301_data_temp,$AM2301_data_humidity" >>  deepsleep.log
+mosquitto_pub -t "${mqtt_cmd}" -r -m "360"  -u test -P test
 
 
 
@@ -40,7 +44,7 @@ mosquitto_pub -t "${mqtt_cmd}" -r -m "3600"  -u test -P test
         #sleep 30
         #echo "going to sleep" >> ${1}deepsleep.log
         #3600 = 1 hour
-        #mosquitto_pub -t "cmnd/${tasmotav}/DeepsleepTime" -r -m "3600"  -u test -P test
+        #mosquitto_pub -t "cmnd/${tasmotav}/DeepsleepTime" -r -m "360"  -u test -P test
         #100 = 100 seconds
         #sleep  3600
         #mosquitto_pub -t "cmnd/${tasmotav}/DeepsleepTime" -r -m "0"  -u test -P test

@@ -6,14 +6,14 @@
 while read data && [ "$data" != "" ]
 do
 
-if [[ $data == *"SENSOR"* ]]; then
+#if [[ $data == *"SENSOR"* ]]; then
 	IN=$data
 	arrIN=(${IN//;/ })
 	id=$(echo ${arrIN[0]})                 
 	an_data=$(echo  ${arrIN[1]} | jq --unbuffered '"\(.Time) \(.ANALOG.A0)"')
 	echo "$id $an_data"
 
-fi
+#fi
 
 
 done

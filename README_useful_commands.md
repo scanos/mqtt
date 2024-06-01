@@ -13,3 +13,6 @@ From the Raspberry Pi CLI (MQTT Broker),
  
 4. Pipe output from topics to a bash script for further processing (see mqtt_pipe.sh and mqtt_pipe_2.sh)
    mosquitto_sub -h localhost -p 1883 -v -t '#' -u test -P test | ./mqtt_pipe_2.sh
+
+   YOU CAN AVOID THE NEED TO USE MQTT WITH TASMOTAS BY USING TASMOTA HTTP API
+EG curl -s http://192.168.4.39/cm?cmnd=STATUS+8 | jq  '.StatusSNS.DS18B20.Temperature'
